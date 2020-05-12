@@ -16,10 +16,10 @@ cd dataset
 ```
 ## run training
 
-python mini_main.py --config configs/training_default.yaml
+`python mini_main.py --config configs/training_default.yaml`
 
 
-##ROBOT DATASET
+## ROBOT DATASET
 ----
 action                   Dataset {50, 4}\
 contact                  Dataset {50, 50}\ 
