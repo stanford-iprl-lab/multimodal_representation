@@ -1,5 +1,6 @@
 # directories
 
+*.DS_Store*
 data/
 tmp/
 **/*.pkl
