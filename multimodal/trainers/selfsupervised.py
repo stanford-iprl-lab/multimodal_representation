@@ -293,7 +293,6 @@ class selfsupervised:
         flow_mask_loss = self.alpha_optical_flow_mask * self.loss_optical_flow_mask(
             optical_flow_mask, optical_flow_mask_label
         )
-        
 
         contact_loss = self.alpha_contact * self.loss_contact_next(
             contact_out, contact_label
@@ -431,10 +430,7 @@ class selfsupervised:
             transform=transforms.Compose(
                 [
                     ProcessForce(32, "force", tanh=True),
-                    ProcessForce(32, "force_fut", tanh=True),
                     ProcessForce(32, "unpaired_force", tanh=True),
-                    ProcessForce(32, "force_cp", tanh=True),
-                    ProcessForce(32, "force_fp", tanh=True),
                     ToTensor(device=self.device),
                 ]
             ),
@@ -449,10 +445,7 @@ class selfsupervised:
             transform=transforms.Compose(
                 [
                     ProcessForce(32, "force", tanh=True),
-                    ProcessForce(32, "force_fut", tanh=True),
                     ProcessForce(32, "unpaired_force", tanh=True),
-                    ProcessForce(32, "force_cp", tanh=True),
-                    ProcessForce(32, "force_fp", tanh=True),
                     ToTensor(device=self.device),
                 ]
             ),

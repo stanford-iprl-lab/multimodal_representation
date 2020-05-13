@@ -18,7 +18,6 @@ contact: 1.0
 pairing: 1.0
 eedelta: 1.0
 
-
 # Training parameters
 lr: 0.0001
 beta1: 0.9 
@@ -39,7 +38,8 @@ logging_folder: logging/
 
 
 # path to dataset hdf5 file'
-dataset: dataset/triangle_real_data/
+# dataset: "dataset/triangle_real_data/"
+dataset: "/juno/group/multimodal_project/test_result_processed/"
 
 val_ratio: 0.20
 cuda: True
