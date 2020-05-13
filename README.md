@@ -11,7 +11,7 @@ Code written by: Matthew Tan, Michelle Lee, Peter Zachares, Yuke Zhu
 ## get dataset
 
 ```
-cd dataset
+cd multimodal/dataset
 ./download_data.sh
 ```
 ## run training

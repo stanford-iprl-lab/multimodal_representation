@@ -11,7 +11,6 @@ class ProprioEncoder(nn.Module):
         super().__init__()
         self.z_dim = z_dim
 
-        # Copied from self-supervised
         self.proprio_encoder = nn.Sequential(
             nn.Linear(8, 32),
             nn.LeakyReLU(0.1, inplace=True),
@@ -33,12 +32,11 @@ class ProprioEncoder(nn.Module):
 class ForceEncoder(nn.Module):
     def __init__(self, z_dim, initailize_weights=True):
         """
-        Image encoder taken from selfsupervised code
+        Force encoder taken from selfsupervised code
         """
         super().__init__()
         self.z_dim = z_dim
 
-        # Copied from self-supervised
         self.frc_encoder = nn.Sequential(
             CausalConv1D(6, 16, kernel_size=2, stride=2),
             nn.LeakyReLU(0.1, inplace=True),
@@ -67,7 +65,6 @@ class ImageEncoder(nn.Module):
         super().__init__()
         self.z_dim = z_dim
 
-        # Copied from self-supervised
         self.img_conv1 = conv2d(3, 16, kernel_size=7, stride=2)
         self.img_conv2 = conv2d(16, 32, kernel_size=5, stride=2)
         self.img_conv3 = conv2d(32, 64, kernel_size=5, stride=2)

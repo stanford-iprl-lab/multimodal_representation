@@ -16,7 +16,6 @@ class OpticalFlowDecoder(nn.Module):
         """
         super().__init__()
 
-        # Copied from self-supervised
         self.optical_flow_conv = conv2d(2 * z_dim, 64, kernel_size=1, stride=1)
 
         self.img_deconv6 = deconv(64, 64)
@@ -111,11 +110,10 @@ class OpticalFlowDecoder(nn.Module):
 class EeDeltaDecoder(nn.Module):
     def __init__(self, z_dim, action_dim, initailize_weights=True):
         """
-        Decodes the optical flow and optical flow mask.
+        Decodes the EE Delta
         """
         super().__init__()
 
-        # Copied from self-supervised
         self.ee_delta_decoder = nn.Sequential(
             nn.Linear(z_dim, 128),
             nn.LeakyReLU(0.1, inplace=True),

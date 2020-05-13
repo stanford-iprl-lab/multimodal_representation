@@ -391,8 +391,6 @@ class selfsupervised:
             "Number of files in multifile dataset = {}".format(len(filename_list))
         )
 
-        # TODO Figure out how to clean up this section
-
         val_filename_list = []
 
         val_index = np.random.randint(
@@ -414,8 +412,6 @@ class selfsupervised:
         )
 
         self.logger.print("Listing finished")
-
-        # TODO: Can be cleaned up
 
         self.dataloaders = {}
         self.samplers = {}
