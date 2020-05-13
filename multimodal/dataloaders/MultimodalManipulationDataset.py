@@ -16,7 +16,6 @@ class MultimodalManipulationDataset(Dataset):
         episode_length=50,
         training_type="selfsupervised",
         n_time_steps=1,
-        reference_frame=False,
         action_dim=4
     ):
         """
@@ -30,7 +29,6 @@ class MultimodalManipulationDataset(Dataset):
         self.episode_length = episode_length
         self.training_type = training_type
         self.n_time_steps = n_time_steps
-        self.reference_frame = reference_frame
         self.dataset = {}
         self.action_dim = action_dim
 
@@ -56,36 +54,14 @@ class MultimodalManipulationDataset(Dataset):
                 self.episode_length - self.n_time_steps - 1
             )
 
-        # Short circuit if only 1 time step
-        if self.n_time_steps == 1:
-            sample = self._get_single(
-                self.dataset_path[list_index],
-                list_index,
-                unpaired_filename,
-                dataset_index,
-                unpaired_idx,
-            )
-            return sample
-
-        samples = []
-        for i in range(self.n_time_steps):
-            sample = self._get_single(
-                self.dataset_path[list_index],
-                list_index,
-                unpaired_filename,
-                dataset_index + i,
-                unpaired_idx,
-            )
-            samples.append(sample)
-
-        if self.reference_frame:
-            # Unpaired index does not matter, but want first index of the orignal file
-            sample = self._get_single(
-                filename + "0_1000.h5", -1, unpaired_filename, 0, 0
-            )
-            samples.append(sample)
-
-        return samples
+        sample = self._get_single(
+            self.dataset_path[list_index],
+            list_index,
+            unpaired_filename,
+            dataset_index,
+            unpaired_idx,
+        )
+        return sample
 
     def _get_single(
         self, dataset_name, list_index, unpaired_filename, dataset_index, unpaired_idx
