@@ -199,39 +199,6 @@ class selfsupervised:
         self.model.load_state_dict(ckpt)
         self.model.eval()
 
-    def get_encoded_vals(self, sample_batched, paired=True):
-        if not self.encoder:
-            raise ValueError("Needs to be in encoder mode")
-
-        if paired is True:
-            # input data
-            image = self.alpha_vision * sample_batched["image"].to(self.device)
-            force = self.alpha_force * sample_batched["force"].to(self.device)
-            proprio = self.alpha_proprio * sample_batched["proprio"].to(self.device)
-            depth = self.alpha_depth * sample_batched["depth"].to(
-                self.device
-            ).transpose(1, 3).transpose(2, 3)
-
-            action = sample_batched["action"].to(self.device)
-
-            return self.model(image, force, proprio, depth, action)
-
-        else:
-            action = sample_batched["action"].to(self.device)
-            unpaired_image = sample_batched["unpaired_image"].to(self.device)
-            unpaired_force = sample_batched["unpaired_force"].to(self.device)
-            unpaired_proprio = sample_batched["unpaired_proprio"].to(self.device)
-            unpaired_depth = (
-                sample_batched["unpaired_depth"]
-                .to(self.device)
-                .transpose(1, 3)
-                .transpose(2, 3)
-            )
-
-            return self.model(
-                unpaired_image, unpaired_force, unpaired_proprio, unpaired_depth, action
-            )
-
     def loss_calc(self, sampled_batched):
 
         # input data
@@ -491,7 +458,7 @@ class selfsupervised:
 
         upsampled_flow = nn.functional.upsample(flow2, size=(h, w), mode="bilinear")
         upsampled_flow = upsampled_flow.cpu().detach().numpy()
-        orig_image = image[image_index].cpu().numpy()  # .transpose(1,2,0)
+        orig_image = image[image_index].cpu().numpy()
 
         orig_flow = flow2rgb(
             flow_label[image_index].cpu().detach().numpy(), max_value=None

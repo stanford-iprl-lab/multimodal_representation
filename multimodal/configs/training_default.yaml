@@ -1,5 +1,3 @@
-
-env: 'peg1'
 training_type: "selfsupervised"
 log_level: 'INFO'
 
@@ -38,8 +36,7 @@ logging_folder: logging/
 
 
 # path to dataset hdf5 file'
-# dataset: "dataset/triangle_real_data/"
-dataset: "/juno/group/multimodal_project/test_result_processed/"
+dataset: "dataset/triangle_real_data/"
 
 val_ratio: 0.20
 cuda: True

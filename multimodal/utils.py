@@ -58,13 +58,13 @@ def quaternion_to_euler(x, y, z, w):
 def compute_accuracy(pred, target):
     pred_1 = torch.where(pred > 0.5, torch.ones_like(pred), torch.zeros_like(pred))
     target_1 = torch.where(target > 0.5, torch.ones_like(pred), torch.zeros_like(pred))
-    batch_size = target.size()[0]
-    accuracy = (
-        torch.where(
-            pred_1 == target_1, torch.ones_like(pred), torch.zeros_like(pred)
-        ).sum()
-        / batch_size
-    )
+    batch_size = target.size()[0] * 1.0
+
+    num_correct = 1.0 * torch.where(
+        pred_1 == target_1, torch.ones_like(pred), torch.zeros_like(pred)
+    ).sum().float()
+
+    accuracy = num_correct / batch_size
     return accuracy
 
 
