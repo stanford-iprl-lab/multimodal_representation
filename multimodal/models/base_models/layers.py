@@ -69,7 +69,7 @@ class Flatten(nn.Module):
         super().__init__()
 
     def forward(self, x):
-        return x.view(x.size(0), -1)
+        return x.reshape(x.size(0), -1)
 
 
 class CausalConv1D(nn.Conv1d):
