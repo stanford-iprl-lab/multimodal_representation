@@ -51,7 +51,7 @@ mistune==0.8.4
 mock==2.0.0
 more-itertools==8.2.0
 mpmath==1.1.0
-nbconvert==5.4.0
+nbconvert==6.3.0
 nbformat==4.4.0
 notebook==5.7.4
 numpy==1.16.0
