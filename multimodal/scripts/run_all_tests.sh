@@ -1,1 +1,0 @@
-python -m pytest models/tests
